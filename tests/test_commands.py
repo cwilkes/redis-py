@@ -1109,7 +1109,7 @@ class TestRedisCommands(object):
         members_b = set([b('2'), b('3'), b('4')])
         r.pfadd('b', *members_b)
         assert r.pfcount('b') == len(members_b)
-        assert r.pfcount('a', 'b') == len(members_b.union(members))
+        assert r.pfcount(('a', 'b')) == len(members_b.union(members))
 
     @skip_if_server_version_lt('2.8.9')
     def test_pfmerge(self, r):

@@ -1813,12 +1813,15 @@ class StrictRedis(object):
         "Adds the specified elements to the specified HyperLogLog."
         return self.execute_command('PFADD', name, *values)
 
-    def pfcount(self, *sources):
+    def pfcount(self, sources):
         """
         Return the approximated cardinality of
         the set observed by the HyperLogLog at key(s).
         """
-        return self.execute_command('PFCOUNT', *sources)
+        if type(sources) in (list, tuple):
+            return self.execute_command('PFCOUNT', *sources)
+        else:
+            return self.execute_command('PFCOUNT', sources)
 
     def pfmerge(self, dest, *sources):
         "Merge N different HyperLogLogs into a single one."
