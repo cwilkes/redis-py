@@ -1818,7 +1818,7 @@ class StrictRedis(object):
         Return the approximated cardinality of
         the set observed by the HyperLogLog at key(s).
         """
-        if type(sources) in (list, tuple):
+        if type(sources) in (set, list, tuple):
             return self.execute_command('PFCOUNT', *sources)
         else:
             return self.execute_command('PFCOUNT', sources)
